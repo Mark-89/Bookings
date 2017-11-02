@@ -1,0 +1,57 @@
+/* Background */
+body {
+    background-color: ghostwhite;
+}
+
+h1.index {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+/* Table */
+table {
+        width: 100%;
+}
+
+thead, tbody, tr, td, th { 
+    display: block; 
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 35px;
+}
+
+tbody {
+    height: 700px;
+    overflow-y: auto;
+}
+
+tbody td, thead th {
+    width: 50%;
+    float: left;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #dbe4ff;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: white;
+}
+
+tbody::-webkit-scrollbar {
+    width: 10px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}

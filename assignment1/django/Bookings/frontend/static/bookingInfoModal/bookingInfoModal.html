@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3>Test</h3>
+</div>
+<div class="modal-body">
+    <ng-form class="form-horizontal">
+        <div class="col-md-6">
+        <div class="form-group">
+           <label class="col-md-4 control-label">Booker</label>
+           <p class="col-md-8 form-control-static">{{vm.booking.booker.user.first_name+vm.booking.booker.user.last_name}}</p> 
+        </div>
+        <div ng-repeat="bookingItem in booking.bookingitems">
+            <div class="form-group">
+                <label class="col-md-4 control-label">Bookingitem Item Id</label>
+                <p class="col-md-8 form-control-static">{{bookingItem.item.id || "-"}}</p> 
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Bookingitem Item Space Id</label>
+                <p class="col-md-8 form-control-static">{{bookingItem.item.spaces.id || "-"}}</p> 
+            </div>
+             <div class="form-group">
+                <label class="col-md-4 control-label">Bookingitem Item Venue Name</label>
+                <p class="col-md-8 form-control-static">{{bookingItem.item.venue.name || "-"}}</p> 
+            </div>
+        </div>   
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="vm.close()"
+    class="btn btn-default glyphicon glyphicon-remove" title="Close">
+    </button>
+</div>

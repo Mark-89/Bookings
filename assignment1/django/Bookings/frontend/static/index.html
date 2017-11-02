@@ -4,31 +4,54 @@
         <meta charset="utf-8">
         <script src="node_modules/angular/angular.js"></script>
         <script src="node_modules/angular-resource/angular-resource.js"></script>
+        <script src="node_modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">      
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
     
-        <script src="js/app.js"></script>
-        <script src="js/bookings/bookings.service.js"></script>
-        <script src="js/bookings/bookings.factory.js"></script>
+        <link rel="stylesheet" href="CSS/bookings.css">      
+        
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">           
             <div ng-app="frontendApp" ng-controller="MainCtrl as vm">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <td>Booking Id</td>
-                        <td>Booker Id</td>
-                        <td>Booking Item Name</td>
-                    </tr>
-                    <tr ng-repeat="booking in vm.bookings">          
-                        <td>{{booking.id}}</td>
-                        <td>{{booking.booker.id}}</td>
-                        <td>{{booking.bookingitems[1].item.name}}</td>
-                    </tr>
+            <h1 class="col-md-12 index">Bookings overview</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Booking Id</th>
+                            <th>Booker Name</th>                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="booking in vm.bookings">          
+                            <td>
+                                <button type="button" ng-click="vm.openBookingInfoModal(booking)"
+                                class="btn btn-default glyphicon glyphicon-info-sign" title="Go to next page.">
+                                </button>
+                                {{booking.id}}
+                            </td>
+                            <td>{{(booking.booker.user.first_name + booking.booker.user.last_name) || "Not yet booked"}}</td>                           
+                        </tr>
+                    </tbody>
                 </table>
+            <div class="col-md-12">
+                <button type="button" ng-click="vm.goToPreviousPage()" ng-disabled="vm.previous === null"
+                class="btn btn-default glyphicon glyphicon-chevron-left" title="Go to previous page.">
+                </button>
+                 <button type="button" ng-click="vm.goToNextPage()" ng-disabled="vm.next === null"
+                 class="btn btn-default glyphicon glyphicon-chevron-right" title="Go to next page.">
+                </button>
+            </div>
             </div>
         </div>    
     </body>
+    <footer>
+        <script src="js/app.js"></script>
+        <script src="js/bookings/bookings.controller.js"></script>
+        <script src="js/bookings/bookings.service.js"></script>
+        <script src="js/bookings/bookings.factory.js"></script>
+        <script src="bookingInfoModal/bookinginfo.controller.js"></script>
+    </footer>
 </html>

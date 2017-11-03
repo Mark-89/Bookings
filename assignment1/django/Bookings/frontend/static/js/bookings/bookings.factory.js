@@ -1,4 +1,11 @@
 myApp.factory('bookingsFactory', function($resource) {
         return $resource("/api/bookings/", 
-        {page: "page"});
-});
+        {},
+        {
+            'search': {
+                method: "GET",
+                isArray: false,               
+                url: "/api/bookings/search/"
+            }
+        });
+})

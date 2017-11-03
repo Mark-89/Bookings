@@ -8,7 +8,8 @@
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">      
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
         <link rel="stylesheet" href="CSS/bookings.css">      
         
@@ -17,6 +18,7 @@
         <div class="container">           
             <div ng-app="frontendApp" ng-controller="MainCtrl as vm">
             <h1 class="col-md-12 index">Bookings overview</h1>
+            <div class="col-md-12">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -36,15 +38,40 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
             <div class="col-md-12">
-                <button type="button" ng-click="vm.goToPreviousPage()" ng-disabled="vm.previous === null"
-                class="btn btn-default glyphicon glyphicon-chevron-left" title="Go to previous page.">
-                </button>
-                 <button type="button" ng-click="vm.goToNextPage()" ng-disabled="vm.next === null"
-                 class="btn btn-default glyphicon glyphicon-chevron-right" title="Go to next page.">
-                </button>
-            </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="button" ng-click="vm.goToPreviousPage()" ng-disabled="vm.previous === null"
+                        class="btn btn-default glyphicon glyphicon-chevron-left" title="Go to previous page.">
+                        </button>              
+                        <button type="button" ng-click="vm.goToNextPage()" ng-disabled="vm.next === null"
+                        class="btn btn-default glyphicon glyphicon-chevron-right" title="Go to next page.">
+                        </button>  
+                    </div>    
+                    <div class="col-md-4 col-md-push-6">          
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" 
+                                aria-haspopup="true" aria-expanded="false">{{vm.filterOptions[vm.selectedFilterOption]}}: <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a ng-click="vm.selectedFilterOption = 1">{{vm.filterOptions[1]}}</a></li>
+                                    <li><a ng-click="vm.selectedFilterOption = 2">{{vm.filterOptions[2]}}</a></li>
+                                    <li><a ng-click="vm.selectedFilterOption = 3">{{vm.filterOptions[3]}}</a></li>
+                                    <li><a ng-click="vm.selectedFilterOption = 4">{{vm.filterOptions[4]}}</a></li>
+                                    <li><a ng-click="vm.selectedFilterOption = 5">{{vm.filterOptions[5]}}</a></li>                           
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" ng-model="vm.searchText" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.search()"><span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>                
+                </div>
+            </div>         
         </div>    
     </body>
     <footer>

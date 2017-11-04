@@ -7,27 +7,28 @@ myApp.controller('MainCtrl', function($modal, $scope, bookingsService, bookingsF
     self.previous = null;
     self.next = null;
     self.filterOptions = {
-        1: "Search booking id",
-        2: "Search space name",
-        3: "Search product name",
-        4: "Search venue name",
-        5: "Search booker name"
+        1: "Filter by booking id",
+        2: "Filter by space name",
+        3: "Filter by product name",
+        4: "Filter by venue name",
+        5: "Filter by booker name"
     };
     self.selectedFilterOption = 1;
     self.searchText = null;
+    self.isInvalidSearch = false;
     
     
     self.goToPreviousPage = function goToPreviousPage() {
         if (self.previous != null) {
             self.currentPage -= 1;
-            getBookings(self.currentPage);
+            self.getBookings(self.currentPage);
         }
     };
     
     self.goToNextPage = function goToNextPage() {
         if (self.next != null) {
             self.currentPage += 1;
-            getBookings(self.currentPage);
+            self.getBookings(self.currentPage);
         }
     };
     
@@ -64,9 +65,16 @@ myApp.controller('MainCtrl', function($modal, $scope, bookingsService, bookingsF
         }
           
         bookingsService.searchBookings(searchObject)
-        .then(function (serverData) {
-            self.openBookingInfoModal(serverData);               
-      });
+        .then(function (serverData) {                  
+            self.isInvalidSearch = false;
+            
+            self.bookings = serverData.results;
+            self.previous = serverData.previous;
+            self.next = serverData.next;                                             
+        })
+        .catch(function() {
+            self.isInvalidSearch = true;
+        });
     }
     
     self.openBookingInfoModal = function openInfo(booking) {
@@ -84,7 +92,8 @@ myApp.controller('MainCtrl', function($modal, $scope, bookingsService, bookingsF
         });
     };
  
-    function getBookings(page) {
+    self.getBookings = function getBookings(page) {
+        self.isInvalidSearch = false;
         bookingsService.getBookings(page)
         .then(function (serverData) {
                 self.bookings = serverData.results;
@@ -94,7 +103,7 @@ myApp.controller('MainCtrl', function($modal, $scope, bookingsService, bookingsF
     }      
       
     function activate() {
-       getBookings(self.currentPage)
+       self.getBookings(self.currentPage)
     }
       
     activate();

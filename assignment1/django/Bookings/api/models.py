@@ -24,10 +24,14 @@ class Items(models.Model):
     venue = models.ForeignKey(Venues, models.DO_NOTHING)
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.Items_id
+
     class Meta:
         managed = False
         db_table = 'items'
-
+    
+       
 
 class Spaces(models.Model):
     id = models.IntegerField(blank=True, null=False, primary_key=True)

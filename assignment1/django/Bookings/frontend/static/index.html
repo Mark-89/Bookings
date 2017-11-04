@@ -49,9 +49,11 @@
                         class="btn btn-default glyphicon glyphicon-chevron-right" title="Go to next page.">
                         </button>  
                     </div>    
-                    <div class="col-md-4 col-md-push-6">          
-                        <div class="input-group">
+                    <div class="col-md-5 col-md-push-5">          
+                        <div class="input-group" ng-class="{'has-error' : vm.isInvalidSearch}">
                             <div class="input-group-btn">
+                                 <button type="button" class="btn btn-default" ng-click="vm.getBookings(1)" title="Remove all filters."><span class="glyphicon glyphicon-refresh"></span>
+                                </button>
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" 
                                 aria-haspopup="true" aria-expanded="false">{{vm.filterOptions[vm.selectedFilterOption]}}: <span class="caret"></span>
                                 </button>
@@ -65,7 +67,7 @@
                             </div>
                             <input type="text" class="form-control" ng-model="vm.searchText" placeholder="Search for...">
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="vm.search()"><span class="glyphicon glyphicon-search"></span>
+                                <button type="button" class="btn btn-default" ng-class="{'btn-danger' : vm.isInvalidSearch}" ng-click="vm.search()"><span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
                         </div>

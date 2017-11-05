@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from api.models import Bookings
 from api.models import Bookers
 from api.models import Users
@@ -70,6 +69,4 @@ class BookingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bookings
-        fields = ('id', 'booker', 'bookingitems')
-        #fields = ('id', 'booker')
-        
+        fields = ('id', 'booker', 'bookingitems')        
